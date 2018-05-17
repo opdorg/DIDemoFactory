@@ -4,6 +4,8 @@ import org.osmand.didemo.controllers.ConstructorInjectedController;
 import org.osmand.didemo.controllers.MyController;
 import org.osmand.didemo.controllers.PropertyInjectedController;
 import org.osmand.didemo.controllers.SetterInjectedController;
+import org.osmand.didemo.examplebeans.FakeDataSource;
+import org.osmand.didemo.examplebeans.FakeJmsBroker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -29,8 +31,18 @@ public class DiDemoApplication {
         logger.info(ctx.getBean(PropertyInjectedController.class).sayHello());
         logger.info(ctx.getBean(SetterInjectedController.class).sayHello());
         logger.info(ctx.getBean(ConstructorInjectedController.class).sayHello());
-
         logger.info(controller.hello());
+
+        // checking properties loaded through PropertySourcesPlaceholderConfigurer
+        FakeDataSource fakeDataSource = ctx.getBean(FakeDataSource.class);
+
+        logger.info(":::::::: DB User Name: {}", fakeDataSource.getUser());
+        logger.info(":::::::: DB Url: {}", fakeDataSource.getDbUrl());
+
+        FakeJmsBroker fakeJmsBroker = ctx.getBean(FakeJmsBroker.class);
+
+        logger.info(":::::::: JMS User Name: {}", fakeJmsBroker.getUser());
+        logger.info(":::::::: JMS Url: {}", fakeJmsBroker.getJmsUrl());
 
     }
 }
