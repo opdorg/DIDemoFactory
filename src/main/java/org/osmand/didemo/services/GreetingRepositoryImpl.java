@@ -7,7 +7,7 @@ public class GreetingRepositoryImpl implements GreetingRepository {
 
     @Override
     public String getEnglishGreeting() {
-        return "Hello - Primary Greeting service";
+        return "Hello - Primary Greeting services";
     }
 
     @Override
